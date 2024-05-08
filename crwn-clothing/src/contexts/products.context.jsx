@@ -1,13 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
-import PRODUCTS from "../shop-data.json";
+import { addCollectionAndDocuments } from "../utils/firebase/firebase.utils.js";
+
+// None needed once put into the firebase database.
+// import SHOP_DATA from "../shop-data.js";
 
 export const ProductsContext = createContext({
   products: [],
 });
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState(PRODUCTS);
+  const [products, setProducts] = useState([]);
+
+  // The following useEffect is only used once to populate the firestore database.
+  // useEffect(() => {
+  //   addCollectionAndDocuments("categories", SHOP_DATA);
+  // }, []);
+
   const value = { products };
 
   return (
